@@ -29,41 +29,54 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+
+    bool isPhone = MediaQuery.of(context).size.width < 600;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
+      drawer: isPhone
+          ? Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text(
+                'Menu',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            ListTile(
+              title: const Text('Episodes'),
+              onTap: () {
+
+              },
+            ),
+            ListTile(
+              title: const Text('About'),
+              onTap: () {
+
+              },
+            ),
+          ],
+        ),
+      )
+          : null,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            /*const SizedBox(height: 32),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  'HUMMING\nBIRD.',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                TextButton(
-                  onPressed: () {
-                    // Navigate to the episodes page
-                  },
-                  child: const Text('Episodes'),
-                ),
-                const SizedBox(width: 32),
-                TextButton(
-                  onPressed: () {
-                    // Navigate to the about page
-                  },
-                  child: const Text('About'),
-                ),
-              ],
-            ),*/
             const SizedBox(height: 32),
             Row(
               children: [
-                // Align the text to the left with margin
+
                 Expanded(
                   child: Align(
                     alignment: Alignment.centerLeft,
@@ -76,24 +89,27 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                 ),
-                Row(
-                  children: [
-                    TextButton(
-                      onPressed: () {
-                      },
-                      child: const Text('Episodes'),
-                    ),
-                    const SizedBox(width: 32),
-                    TextButton(
-                      onPressed: () {
-                      },
-                      child: const Text('About'),
-                    ),
-                  ],
-                ),
+
+                if (!isPhone)
+                  Row(
+                    children: [
+                      TextButton(
+                        onPressed: () {
+
+                        },
+                        child: const Text('Episodes'),
+                      ),
+                      const SizedBox(width: 32),
+                      TextButton(
+                        onPressed: () {
+
+                        },
+                        child: const Text('About'),
+                      ),
+                    ],
+                  ),
               ],
             ),
-
             const SizedBox(height: 32),
             const Text(
               'FLUTTER WEB.\nTHE BASICS',
@@ -107,7 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
             const SizedBox(height: 32),
             ElevatedButton(
               onPressed: () {
-                // Navigate to the course page
+
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.greenAccent,
@@ -115,7 +131,6 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               child: const Text('Join course', style: TextStyle(color: Colors.white)),
             ),
-
           ],
         ),
       ),
